@@ -1,0 +1,20 @@
+
+<!--
+    function count(){
+        let countCreate = sheet2.getRange(2,1,1,1).getValue();
+        let countUpdate = sheet2.getRange(2,2,1,1).getValue();
+        let countDelete = sheet2.getRange(2,3,1,1).getValue();
+        return { countCreate: countCreate, countUpdate: countUpdate, countDelete: countDelete };
+    }
+
+    function doGet(e) {
+        let data = sheet.getRange(2, 1, sheet.getLastRow()-1, sheet.getLastColumn()-1).getValues();
+        let obj = {};
+        obj.contents = data;
+        let countData = count();
+        obj.counts = countData;
+    
+        return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
+    }
+
+-->

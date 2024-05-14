@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--HEAD (Metadatos)-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Title site-->
+    <title>cpanel</title>
+    <!--FavIcon-->
+    <link rel="icon" type="IMG/png" href="FavIcon.png">
+    <!--Bootstrap min.css-->
+    <link rel="stylesheet" href="bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <!--Bootstrap min.js-->
+    <script src="bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
+    <!--Bootstrap icon-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"><!--CDN Bootstrap Icons-->
+    <!--FontAwesome-->
+    <script src="https://kit.fontawesome.com/9ffe67f035.js" crossorigin="anonymous"></script>
+    <!--Styles css-->
+    <link rel="stylesheet" href="css/styles.css">
+    <!--Responsive css-->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!--Hacer Zoom en la imagen del Preview-->
+    <script src="js/zoom-proyect.js"></script>
+</head>
+<!--BODY (SITE)-->
+<body class="bg-dark">
+    <!--CABECERA-->
+    <header class="col-12" id="header-p"></header>
+    <!--CONTAINER-->
+    <div class="container">
+        <!--CUERPO-->
+        <main>
+            <!--Sección API PROYECTOS-->
+            <section>
+                <!--tiulo-->
+                <h1 class="text-light mt-5 mb-3">Api proyectos</h1>
+                <hr class="mb-5">
+                <!--tiulo-->
+                <p class="mb-5">Los datos de los proyectos guardados son almencenados en la cuenta de google ferdyamc.dev@gmail.com. Las imagnes de los proyectos son guardadas en una carpeta específica
+                    dentro del drive (google drive). La url y los id de las imagenes son guardados en una hoja de calculo (goolgle sheet) junto con los nombres y descripciones de proyecto.
+                </p>
+                <!--Link hoja de calculo (función copy en el archivo "copy-link.js")-->
+                <span>Link de la hoja de calculo en gmail.</span>
+                <div class="link d-flex justify-content-between align-items-center">
+                    <span class="m-0" id="text-link-sheet">https://docs.google.com/spreadsheets/d/1WoB34ue-69DSxToySDXPnYj5esnRXhUaquMbo_snGmA/edit#gid=0</span>
+                    <i class="fa-regular fa-copy m-0" id="btn-link-sheet"></i>
+                </div>
+                <!--Link drive (función copy en el archivo "copy-link.js")-->
+                <span>Link de la carpeta de drive.</span>
+                <div class="link d-flex justify-content-between align-items-center">
+                    <span class="m-0" id="text-link-drive">https://drive.google.com/drive/folders/11VJwC6-LZ87HALlp1LSoz-je0twCS83f</span>
+                    <i class="fa-regular fa-copy m-0" id="btn-link-drive"></i>
+                </div>
+                <!--
+                <div class="row" id="contenedor-dashboard">
+                    <div class="col-6">
+                        <iframe class="col-12 h-100 rounded-2" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR4codkCii7cevqORiKYJeOq2HKvMil-Xd3Q7JWtpnT9Vgg_8Wj84gTodNsiARuYS1QyjD0lgyRkeKD/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+                        
+                    </div>
+                    <div class="contenedor-chart col-6">
+                        <canvas  id="myChart" >
+    
+                        </canvas > 
+                    </div>
+                </div>
+                -->     
+            </section>
+            <!--Sección REGISTRAR PROYECTOS-->
+            <section>
+                <!--titulo-->
+                <h1 class="text-light mt-5 mb-3 d-inline-block">Registrar proyecto</h1>
+                <hr class="mb-5">
+                <!--contenedor Paneles-->
+                <div class="row gap-3 d-flex flex-wrap" id="contenedor-paneles">
+                    <!--panel formulario-->
+                    <div class="col p-3" id="contenedor-formulario" style="min-height: 475px;">
+                        <!--titulo panel-->
+                        <span class="fs-5">Request</span>
+                        <!--formulario-->
+                        <form action="" class="p-3 needs-validation col-12" id="formulario" novalidate>
+                            <!--campo nombre-->
+                            <input type="text" name="titulo" id="Nombre" required class="text-secondary mt-2 mb-3" autocomplete="off" placeholder="Nombre">
+                            <!--campo descripción-->
+                            <textarea name="Descripcion" id="AreaDescripcion" cols="30" rows="3" required class="text-secondary mt-2 mb-3" placeholder="Descripción"></textarea>
+                            <!--campo img-->
+                            <label for="ImgProyecto" class="text-secondary form-label">Seleccionar imágen</label>
+                            <input type="file" accept="image/*" id="ImgProyecto" required class="text-secondary" onchange="changeImgUpdate(this)">
+                            <!--botón submit-->
+                            <button class="btn btn-outline-secondary col-12 mt-3" type="submit">Guardar</button> 
+                        </form>
+                        <!--texto de respuesta-->
+                        <small class="text-secondary text-end d-block mt-4" id="text-status">Status <small class="text-end" id="text-status"></small></small>                        
+                    </div>
+                    <!--panel objeto-->
+                    <div class="col p-3" id="contenedor-objeto" style="height: 475px;">
+                        <!--titulo panel-->
+                        <span class="fs-5">Object</span>
+                        <!--campo de visualización del objeto-->
+                        <textarea name="" id="areaObjeto" cols="30" class="text-secondary border-0" disabled style="font-size: 12px; height: 375px;"></textarea>
+                    </div>
+                    <!--panel preview-->
+                    <div class="col p-3" id="contenedor-preiew" style="height: 475px;">
+                        <!--titulo panel-->
+                        <span class="fs-5">Preview</span>
+                        <!--contendedor del preview-->
+                        <div class="item-mansory p-2" id="item-mansory">
+                            <!--aticulo preview-->
+                            <article>
+                                <!--img (animación de zoom en el archivo "zoom-proyecto.js")-->
+                                <div class="box-img-mansory" id="box-img-mansory" onmousemove="zoomIn.call(this,event)" onmouseleave="zoomOut.call(this)">
+                                    <img src="" alt="" class="img-proyecto" loading="lazy" id="img-proyecto">
+                                </div>
+                                <!--titulo-->
+                                <h2 class="titulo-proyecto mt-3" id="titulo-proyecto"></h2>   
+                                <!--descripción-->         
+                                <p class="texto-proyecto" id="descripcion-proyecto"></p>
+                                <!--opciones github y view-->
+                                <div class="d-flex justify-content-end border-0">
+                                    <a class="py-1 px-2 border-0 rounded-2 btn-github text-light"  href="#">Ver GitHub</a>
+                                    <button class="py-1 px-2 border-0 rounded-2 ms-2 btn-icon"><i class="bi bi-eye text-light"></i></button>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--Sección LISATADO DE PROYECTOS-->
+            <section class="pb-5">
+                <!--titulo-->
+                <h1 class="text-light mt-5 mb-3 d-inline-block">Listado de proyectos</h1>
+                <hr>
+                <!--Progres bar-->
+                <div class="progress" id="progress-bar">
+                    <div class="progress-bar progress-bar-striped bg-success progress-bar-animated w-100">
+                        100%
+                    </div>
+                </div>
+                <!--lista de proyecto-->
+                <ul class="col-12" id="lista-proyectos">
+                    <!--(los "li" se crean a través de "getData" del archivo "cpanel.js")-->
+                </ul>
+            </section>
+        </main>
+    </div>
+    <footer class="col-12 d-flex flex-column justify-content-center align-items-center" id="pie-de-pagina" style="height: 80px;background:rgb(114, 58, 235)">
+        <p class=" m-0" style="line-height: 30px; height: 30px;">Desarrollado por Ferdy Andrés Marulanda Carvajal</p>
+        <p class=" m-0" style="line-height: 30px; height: 30px;">2024</p>
+    </footer> 
+    <!--ARCHIVOS JS-->
+    <script src="js/cpanel.js"></script><!--CRUD-->
+    <script src="js/copy-link.js"></script> <!--Copiar links: sheet - drive-->
+    <!--<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>--><!--CDN Chart JS-->
+    <!--<script src="js/chart.js"></script>--><!--Implementación - Chart JS-->
+</body>
+</html>
