@@ -37,10 +37,10 @@ function getData(){
                             <div class="col-9 col-lg-2 d-flex">
                                 <p class="m-0 itemListNombre">${row[1]}</p>
                             </div>
-                            <div class="col-11 offset-1 mt-3 col-lg-6 offset-lg-0 mt-0 d-flex">
+                            <div class="col-11 offset-1 mt-3 col-lg-6 offset-lg-0 mt-lg-0 d-flex">
                                 <p class="m-0 itemListDescripcion pe-5">${row[2]}</p>
                             </div>
-                            <div class="col-12 d-flex justify-content-end mt-3 col-lg-2 justify-content-lg-center mt-0 gap-2 contenedor-edit-delete">
+                            <div class="col-12 d-flex justify-content-end mt-3 col-lg-2 justify-content-lg-center mt-lg-0 gap-2 contenedor-edit-delete">
                                 <button class="btn btn-outline-secondary btn-list btn-editar" onclick="editar(this)">Editar</button>
                                 <button class="btn btn-outline-secondary btn-list" onclick="eliminar(${row[0]})">Eliminar</button>
                             </div>
