@@ -9,12 +9,6 @@
     }
 }
 
-@media (max-width: 768px){
-    label[for="ImgProyecto"]{
-        padding: 0 !important;
-    }
-}
-
 @media (max-width: 500px){
     form{
         width: 80%;
