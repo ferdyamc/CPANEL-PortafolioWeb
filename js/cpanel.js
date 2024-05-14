@@ -27,20 +27,20 @@ function getData(){
             const li = document.createElement('li');
             li.classList.add("col-12");   
             li.innerHTML=`
-                        <div class="col-12 d-flex">
-                            <div class="col-1 d-flex">
+                        <div class="col-12 d-flex flex-wrap">
+                            <div class="col-1 col-lg-1 d-flex">
                                 <span class="itemListId">${row[0]}</span>
                             </div>
-                            <div class="col-1 d-flex">
+                            <div class="col-2 col-lg-1 d-flex">
                                 <img src="https://drive.google.com/thumbnail?id=${row[3]}" alt="" class="img-list itemListImg">
                             </div>
-                            <div class="col-2 d-flex">
+                            <div class="col-9 col-lg-2 d-flex">
                                 <p class="m-0 itemListNombre">${row[1]}</p>
                             </div>
-                            <div class="col-6 d-flex">
-                                <p class="m-0 itemListDescripcion">${row[2]}</p>
+                            <div class="col-11 offset-1 mt-3 col-lg-6 offset-lg-0 mt-0 d-flex">
+                                <p class="m-0 itemListDescripcion pe-5">${row[2]}</p>
                             </div>
-                            <div class="col-2 d-flex justify-content-center gap-2 contenedor-edit-delete">
+                            <div class="col-12 d-flex justify-content-end mt-3 col-lg-2 justify-content-lg-center mt-0 gap-2 contenedor-edit-delete">
                                 <button class="btn btn-outline-secondary btn-list btn-editar" onclick="editar(this)">Editar</button>
                                 <button class="btn btn-outline-secondary btn-list" onclick="eliminar(${row[0]})">Eliminar</button>
                             </div>
@@ -302,9 +302,9 @@ function editar(btn){
             <!--titulo-->
             <h1 class="text-light mt-5 mb-5 d-inline-block">Editar proyecto</h1>
             <!--contenedor Paneles-->
-            <div class="row gap-3 d-flex flex-wrap mb-5" id="contenedor-paneles">
+            <div class="row d-flex flex-wrap mb-5" id="contenedor-paneles">
                 <!--panel formulario-->
-                <div class="col p-3" id="contenedor-formulario" style="min-height: 475px;">
+                <div class="p-3" id="contenedor-formulario" style="min-height: 475px;">
                     <!--titulo panel-->
                     <span class="fs-5">Request</span>
                     <!--formulario-->
@@ -328,7 +328,7 @@ function editar(btn){
                     </div>
                 </div>
                 <!--panel objeto-->
-                <div class="col p-3" id="contenedor-objeto" style="height: 475px;">
+                <div class="p-3" id="contenedor-objeto" style="height: 475px;">
                     <!--titulo panel-->
                     <span class="fs-5">Object</span>
                     <!--campo de visualización del objeto-->
@@ -343,7 +343,7 @@ function editar(btn){
                     </textarea>
                 </div>
                 <!--panel preview-->
-                <div class="col p-3" id="contenedor-preiew" style="height: 475px;">
+                <div class="p-3" id="contenedor-preiew" style="height: 475px;">
                     <!--titulo panel-->
                     <span class="fs-5">Preview</span>
                     <!--contendedor del preview-->
@@ -359,7 +359,7 @@ function editar(btn){
                             <!--descripción-->         
                             <p class="texto-proyecto" id="descripcion-proyecto-update">${descripcionEdit}</p>
                             <!--opciones github y view-->
-                            <div class="d-flex justify-content-end border-0">
+                            <div class="d-flex justify-content-end border-0 w-auto">
                                 <a class="py-1 px-2 border-0 rounded-2 btn-github text-light"  href="#">Ver GitHub</a>
                                 <button class="py-1 px-2 border-0 rounded-2 ms-2 btn-icon"><i class="bi bi-eye text-light"></i></button>
                             </div>
