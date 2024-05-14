@@ -1,5 +1,5 @@
 
-let img; //variable para almacenar la imagen especifica de las colecciones.
+let img; //variable para almacenar el elemento "img" al cual se hará hacer zoom
 
 
 function zoomIn(event){ //evento mousemove
