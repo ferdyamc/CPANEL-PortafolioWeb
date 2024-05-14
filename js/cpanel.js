@@ -4,13 +4,16 @@ const nombre = document.getElementById("Nombre");//input nombre (Post)
 const descripcion = document.getElementById("AreaDescripcion");//textarea descripción (Post)
 const inpImagen = document.getElementById("ImgProyecto");//input img (Post)
 const dataList = document.getElementById('lista-proyectos');//ul (lista de proyectos)
-const estado = document.getElementById("text-status");//small (mensaje de estado de la response)
+const estado1 = document.getElementById("text-status");//small (mensaje de estado de la response)
+const estado2 = document.getElementById("text-end");//small (mensaje de estado de la response)
 let result,spt,method;//(Variables para: obtener la imagen del input, obtener su base64, cambiar el "action" del body en el json de la request)
 getData();//Mostrar la lista de proyectos al cargar la pagina
 
 //Obtener datos de la Nube - rellenar lista -----------------------------------------------------------------(GET)
 function getData(){
     document.querySelector("#progress-bar").style.display="block";
+    // Limpia el contenido anterior del ul
+    dataList.style.display="none";
     /*Obtener en formato JSON los datos de la hoja de calcula de google y llenar UL (listado de pyectos)*/
     fetch(url)
     .then(response => response.json())
@@ -44,6 +47,7 @@ function getData(){
                         </div>`
             dataList.appendChild(li);
             document.querySelector("#progress-bar").style.display="none";
+            dataList.style.display="block";
             /* const imgelement = document.createElement('img');       
             //imgelement.src = `https://drive.google.com/thumbnail?id=${row[1]}`; // Modo para construir la imgane con thumbnail -> miniatura
             imgelement.src = `https://www.googleapis.com/drive/v3/files/${row[1]}?alt=media&key=AIzaSyB-98FDn9xxn2ngaVc3xCbjOowqYJwSl3A`;*/  
@@ -58,6 +62,8 @@ form.addEventListener("submit", (event)=>{
     event.preventDefault();
     //Agregar clase al formulario (para visualiar los checks en los input)
     form.classList.add('was-validated');
+    //Mostrar barra de progreso
+    document.querySelector("#progress-bar-post").style.display="block";
     //Construir objeto con los datos necesarios (para enviar al appscript)
     method = "post";
     let obj = {
@@ -75,20 +81,31 @@ form.addEventListener("submit", (event)=>{
     })
     .then(response => response.text())//Procesos que se ejecutan una vez realizada la request (response).
     .then(data => {
+        //ocultar barra de progreso
+        document.querySelector("#progress-bar-post").style.display="none";
         getData();
         form.reset();
         form.classList.remove('was-validated');
-        estado.textContent=" 200 Ok";
-        estado.classList.add("text-success");
-        estado.classList.remove("text-danger");
+        estado1.style.display="block";
+        estado2.textContent=" 200 Ok";
+        estado2.classList.remove("text-danger");
+        estado2.classList.add("text-success");
         desrtuirObjeto();
         ocultarPreview();
+
+        setTimeout(()=>{
+           estado1.style.display="none";
+        },5000)
     })
     .catch(error => {
         console.error('Error:', error)
-        estado.textContent=" 400 Bad Request";
-        estado.classList.remove("text-success");
-        estado.classList.add("text-danger"); 
+        estado1.style.display="block";
+        estado2.textContent=" 400 Bad Request";
+        estado2.classList.remove("text-success");
+        estado1.classList.add("text-danger"); 
+        setTimeout(()=>{
+            estado2.style.display="none";
+         },5000)
     });//capturar mensajes de error
 
 })
@@ -150,13 +167,16 @@ function eliminar(idDelete){
         id:idDelete,
         action:method
     }
-    
+    //Mostrar la barra de progreso
+    document.querySelector("#progress-bar-delete").style.display="block";
     fetch(url,{
         method:"POST",
         body:JSON.stringify(objDelete),
     })
     .then(response => response.text())
     .then(text => {
+        //Ocultar la barra de progreso
+        document.querySelector("#progress-bar-delete").style.display="none";
         getData();
     })
     .catch(error => {
@@ -197,15 +217,24 @@ function formUpdate(e){
             type : imgUpdate.files[0].type,
             action : method
         }
-    }  
+    } 
+    //Mostrar la barra de progreso
+    document.querySelector("#progress-bar-update").style.display="block";
     fetch(url,{
         method:"POST",
         body:JSON.stringify(obj),
     })
     .then(response => response.text())
     .then(data => {
+        
+        //Ocultar la barra de progreso
+        document.querySelector("#progress-bar-update").style.display="none";
+        //Ocultar elemento con la clase "hijo"
+        let b = document.querySelector(".hijo");
+        b.classList.remove("d-block");
+        b.style.display="none";
+        //Actualizar lista
         getData();
-        console.log(data);
     })
     .catch(error =>{
         console.log("Mensaje de error ",error)
@@ -292,6 +321,11 @@ function editar(btn){
                         <!--botón submit-->
                         <button class="btn btn-outline-secondary col-12 mt-3" type="submit">Guardar</button> 
                     </form>
+                    <div class="progress mt-3 border-0 mx-3" id="progress-bar-update">
+                        <div class="progress-bar progress-bar-striped bg-secondary progress-bar-animated w-100">
+                            Actualizando proyecto...
+                        </div>
+                    </div>
                 </div>
                 <!--panel objeto-->
                 <div class="col p-3" id="contenedor-objeto" style="height: 475px;">

@@ -89,8 +89,13 @@
                             <!--botón submit-->
                             <button class="btn btn-outline-secondary col-12 mt-3" type="submit">Guardar</button> 
                         </form>
+                        <div class="progress mt-3 border-0 mx-3" id="progress-bar-post">
+                            <div class="progress-bar progress-bar-striped bg-secondary progress-bar-animated w-100">
+                                Creando proyecto...
+                            </div>
+                        </div>
                         <!--texto de respuesta-->
-                        <small class="text-secondary text-end d-block mt-4" id="text-status">Status <small class="text-end" id="text-status"></small></small>                        
+                        <small class="text-secondary text-end mt-4" id="text-status">Status <small class="" id="text-end"></small></small>                        
                     </div>
                     <!--panel objeto-->
                     <div class="col p-3" id="contenedor-objeto" style="height: 475px;">
@@ -131,9 +136,9 @@
                 <h1 class="text-light mt-5 mb-3 d-inline-block">Listado de proyectos</h1>
                 <hr>
                 <!--Progres bar-->
-                <div class="progress" id="progress-bar">
+                <div class="progress mb3 mt-5" id="progress-bar">
                     <div class="progress-bar progress-bar-striped bg-success progress-bar-animated w-100">
-                        100%
+                        Actualizando Lista...
                     </div>
                 </div>
                 <!--lista de proyecto-->
@@ -143,6 +148,7 @@
             </section>
         </main>
     </div>
+    <!--FOOTER-->
     <footer class="col-12 d-flex flex-column justify-content-center align-items-center" id="pie-de-pagina" style="height: 80px;background:rgb(114, 58, 235)">
         <p class=" m-0" style="line-height: 30px; height: 30px;">Desarrollado por Ferdy Andrés Marulanda Carvajal</p>
         <p class=" m-0" style="line-height: 30px; height: 30px;">2024</p>

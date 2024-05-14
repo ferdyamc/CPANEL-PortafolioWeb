@@ -104,6 +104,9 @@ label[for="ImgProyecto"], label[for="imgUpdate"] {
     border-radius: 5px;
 }
 
+#text-status{
+    display: none;
+}
 /* PROYECT PREVIEW  */
 .item-mansory{
     width: auto;
@@ -171,8 +174,22 @@ label[for="ImgProyecto"], label[for="imgUpdate"] {
 }
 
 /* LIST PROYECT */
-#progress-bar{
+#progress-bar, #progress-bar-delete{
     display: none;
+    height: 20px;
+}
+#progress-bar div, #progress-bar-delete div{
+    height: 20px;
+    line-height: 20px;
+}
+
+#progress-bar-update, #progress-bar-post{
+    display: none;
+    height: 25px;
+}
+#progress-bar-update div, #progress-bar-post div{
+    height: 25px;
+    line-height: 25px;
 }
 #lista-proyectos li{
     border-bottom: 1px dashed gray;
