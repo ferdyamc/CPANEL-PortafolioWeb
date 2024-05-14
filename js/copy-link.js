@@ -1,5 +1,5 @@
-let btnsheet = document.getElementById("btn-link-sheet");//botón para copiar el la hója de calculo
-let btndrive = document.getElementById("btn-link-drive");//botón para copiar ela carpeta de drive
+let btnsheet = document.getElementById("btn-link-sheet");//botón para copiar la hója de calculo
+let btndrive = document.getElementById("btn-link-drive");//botón para copiar la carpeta de drive
 
 //Evento para copiar link de la hoja de cáculo y cambiar el estilo de ícono "copiar" por 1 segundo al hacer click en el ícono
 btnsheet.addEventListener("click" , ()=>{
