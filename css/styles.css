@@ -37,12 +37,18 @@ span{
 }
 #text-link-sheet, #text-link-drive, i{
     font-size: 14px;
-    line-height: 100%;
+  
     color: black;
+    
+}
+#text-link-sheet, #text-link-drive{
+    word-wrap: normal;
+    max-width: 85%;
 }
 i{
     cursor: pointer;
-}.contenedor-dashboard div{
+}
+.contenedor-dashboard div{
     height: 300px;
 }
 .contenedor-chart{

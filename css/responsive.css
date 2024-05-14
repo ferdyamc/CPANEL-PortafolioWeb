@@ -14,3 +14,9 @@
         width: 80%;
     }
 }
+
+@media (max-width: 425px){
+    #text-link-sheet,#text-link-drive{
+        word-wrap:break-word;
+    }
+}
