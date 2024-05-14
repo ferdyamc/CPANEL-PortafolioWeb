@@ -132,7 +132,6 @@ label[for="ImgProyecto"], label[for="imgUpdate"] {
 
 .box-img-mansory{
     width: auto !important ;
-    min-width: 350px;
     height: 200px;
     background-color: #ffffff;
     border-radius: 2px; 
