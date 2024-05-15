@@ -128,13 +128,15 @@ inpImagen.addEventListener("change", function(){
 //Construir Objeto
 function construirObjeto(base64, type, name, nombre, descripcion){
     let contenido = `{
+
    "nombre" : "${nombre}",
 
    "descripcion" : "${descripcion}",
 
    "type" : "${type}","name" : "${name}",
    
-   "base64" : "${base64}"  
+   "base64" : "${base64}" 
+
 }`;
     document.getElementById("areaObjeto").textContent = contenido;
 }
@@ -334,6 +336,7 @@ function editar(btn){
                     <span class="fs-5">Object</span>
                     <!--campo de visualización del objeto-->
                     <pre name="" id="areaObjeto" class="text-secondary border-0"  style="font-size: 12px; height: 375px;">{
+                        
    "nombre" : "${nombreEdit}",
 
    "descripcion" : "${descripcionEdit}",
@@ -343,6 +346,7 @@ function editar(btn){
    "name" : "${data.name}",
 
    "base64" : ""
+     
 }
                     </pre>
                 </div>
