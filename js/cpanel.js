@@ -57,58 +57,79 @@ function getData(){
 }
 
 //Submit ----------------------------------------------------------------------------------------------------(POST)
-form.addEventListener("submit", (event)=>{
-    //Evitar eventos por defecto (evitar actualizar la pagina al hacer click)
-    event.preventDefault();
-    //Agregar clase al formulario (para visualiar los checks en los input)
-    form.classList.add('was-validated');
-    //Mostrar barra de progreso
-    document.querySelector("#progress-bar-post").style.display="block";
-    //Construir objeto con los datos necesarios (para enviar al appscript)
-    method = "post";
-    let obj = {
-        base64:spt,
-        type:inpImagen.files[0].type,
-        name:inpImagen.files[0].name,
-        nombre:nombre.value,
-        descripcion:descripcion.value,
-        action:method
-    }
-    //Utilizar api fetch para enviar el objeto al appscript (request)
-    fetch(url,{
-        method:"POST",
-        body:JSON.stringify(obj),
-    })
-    .then(response => response.text())//Procesos que se ejecutan una vez realizada la request (response).
-    .then(data => {
-        //ocultar barra de progreso
-        document.querySelector("#progress-bar-post").style.display="none";
-        getData();
-        form.reset();
-        form.classList.remove('was-validated');
-        estado1.style.display="block";
-        estado2.textContent=" 200 Ok";
-        estado2.classList.remove("text-danger");
-        estado2.classList.add("text-success");
-        desrtuirObjeto();
-        ocultarPreview();
 
-        setTimeout(()=>{
-           estado1.style.display="none";
-        },5000)
-    })
-    .catch(error => {
-        console.error('Error:', error)
-        estado1.style.display="block";
-        estado2.textContent=" 400 Bad Request";
-        estado2.classList.remove("text-success");
-        estado1.classList.add("text-danger"); 
-        setTimeout(()=>{
-            estado2.style.display="none";
-         },5000)
-    });//capturar mensajes de error
 
-})
+    form.addEventListener("submit", (event)=>{
+        //Evitar eventos por defecto (evitar actualizar la pagina al hacer click)
+        event.preventDefault();
+        //Mostrar barra de progreso
+        document.querySelector("#progress-bar-post").style.display="block";
+        let lb = document.querySelector("#label-img");
+        //validar form
+        if (!form.checkValidity()) {  
+            //Aplica estilos de validación
+            form.classList.add('was-validated');
+            //Aplica borde al campo de imagen (si se selecciono imagen:verde - Sino: rojo)
+            if(inpImagen.files.length == 0){
+                lb.style.borderColor="#dc3545";
+            }else{
+                lb.style.borderColor="#198754";
+            }
+            //Mostrar barra de progreso
+            document.querySelector("#progress-bar-post").style.display="none";
+            //Detener el evento
+            event.stopPropagation() 
+        }else{
+            //Aplicar estilos borde verde al campo de imagen
+            lb.style.borderColor="#198754";
+            //Construir objeto con los datos necesarios (para enviar al appscript)
+            method = "post";
+            let obj = {
+                base64:spt,
+                type:inpImagen.files[0].type,
+                name:inpImagen.files[0].name,
+                nombre:nombre.value,
+                descripcion:descripcion.value,
+                action:method
+            }
+            //Utilizar api fetch para enviar el objeto al appscript (request)
+            fetch(url,{
+                method:"POST",
+                body:JSON.stringify(obj),
+            })
+            .then(response => response.text())//Procesos que se ejecutan una vez realizada la request (response).
+            .then(data => {
+                //ocultar barra de progreso
+                document.querySelector("#progress-bar-post").style.display="none";
+                getData();     
+                estado1.style.display="block";
+                estado2.textContent=" 200 Ok";
+                estado2.classList.remove("text-danger");
+                estado2.classList.add("text-success");
+                desrtuirObjeto();
+                ocultarPreview();
+                form.classList.add('was-validated'); 
+                setTimeout(()=>{
+                    estado1.style.display="none";
+                    form.classList.remove('was-validated');
+                    lb.style.borderColor="#555555";
+                    form.reset();
+                },5000)
+            })
+            .catch(error => {
+                console.error('Error:', error)
+                estado1.style.display="block";
+                estado2.textContent=" 400 Bad Request";
+                estado2.classList.remove("text-success");
+                estado1.classList.add("text-danger"); 
+                setTimeout(()=>{
+                    estado2.style.display="none";
+                },5000)
+            });//capturar mensajes de error
+        }
+        form.classList.add('was-validated');
+    },false)
+
 
 //Convertir Imagen del input a base64
 inpImagen.addEventListener("change", function(){
@@ -119,6 +140,14 @@ inpImagen.addEventListener("change", function(){
     //función que se ejecuta una vez leida la imagen por el FileReader
     fr.onload = function(){
         result = fr.result;//Captura el valor obtenido
+        if(result){
+            let cls = document.querySelector(".was-validated");
+            if(cls){
+                document.querySelector("#label-img").style.borderColor="#198754";
+            }else{
+                
+            }
+        }
         spt = result.split("base64,")[1];//hace un split al valor obtenido por el FileReader (para retirar la palabra "base64,")
         construirObjeto(spt, inpImagen.files[0].type, inpImagen.files[0].name, nombre.value, descripcion.value);/*Muestra el objeto contruido*/
         mostrarPreview();/*Muestra el preview*/
@@ -425,7 +454,7 @@ function reloadscript(){
     let oldCss = document.getElementById("dynamic-css");
 
     if (oldCss) {
-    document.body.removeChild(oldScript);
+    document.head.removeChild(oldCss);
     let scriptElementCss = document.createElement('link');
     scriptElementCss.id = 'dynamic-css';
     scriptElementCss.href = 'js/prism-js/prism.css';
