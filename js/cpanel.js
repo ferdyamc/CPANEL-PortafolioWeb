@@ -443,21 +443,23 @@ function changeImgUpdate(img){
 //Recarga el css y el script "de prism js" para aplicar los estilos a los paneles "object"
 function reloadscript(){
    let oldScript = document.getElementById("dynamic-js");
+   let oldCss = document.getElementById("dynamic-css");
 
    if (oldScript) {
-    document.body.removeChild(oldScript);
-    let scriptElementJs = document.createElement('script');
-    scriptElementJs.id = 'dynamic-js';
-    scriptElementJs.src = 'js/prism-js/prism.js';
-    document.body.appendChild(scriptElementJs);
-}
-    let oldCss = document.getElementById("dynamic-css");
+        document.body.removeChild(oldScript);
+        let scriptElementJs = document.createElement('script');
+        scriptElementJs.id = 'dynamic-js';
+        scriptElementJs.src = 'js/prism-js/prism.js';
+        document.body.appendChild(scriptElementJs);
+    }
+    
 
     if (oldCss) {
     document.head.removeChild(oldCss);
     let scriptElementCss = document.createElement('link');
     scriptElementCss.id = 'dynamic-css';
+    scriptElementCss.rel="stylesheet";
     scriptElementCss.href = 'js/prism-js/prism.css';
-    document.body.appendChild(scriptElementCss);
+    document.head.appendChild(scriptElementCss);
     }
 }
