@@ -91,11 +91,7 @@ input, textarea, pre{
     width: 100%;
     overflow-x: hidden;
 }
-pre {
-    overflow-wrap: break-word; /* Para forzar el wrap del texto */
-    white-space: pre-line; /* Para mantener los espacios y saltos de línea */
 
-  }
 input[type="file"]{
     width: 0.1px;
     height: 0.1px;
@@ -120,6 +116,32 @@ label[for="ImgProyecto"], label[for="imgUpdate"] {
 
 #text-status{
     display: none;
+}
+/*OBJECT*/
+/*PRE*/
+pre{
+    height: 375px;
+    border: 0;
+}
+pre,code {
+    display: block !important;
+    width: 100%;
+    overflow-wrap: break-word; /* Para forzar el wrap del texto */
+    white-space: pre-line !important; /* Para mantener los espacios y saltos de línea */
+    background: transparent !important;
+}
+code span{
+    overflow-wrap: break-word; /* Para forzar el wrap del texto */
+    white-space: pre-line; /* Para mantener los espacios y saltos de línea */
+    background:none !important ;
+}
+code{
+    background: transparent !important;
+    display: block;
+    text-shadow:none !important;
+}
+code span{
+    display: inline;
 }
 /* PROYECT PREVIEW  */
 .item-mansory{

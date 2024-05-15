@@ -122,6 +122,7 @@ inpImagen.addEventListener("change", function(){
         spt = result.split("base64,")[1];//hace un split al valor obtenido por el FileReader (para retirar la palabra "base64,")
         construirObjeto(spt, inpImagen.files[0].type, inpImagen.files[0].name, nombre.value, descripcion.value);/*Muestra el objeto contruido*/
         mostrarPreview();/*Muestra el preview*/
+        reloadscript();
     }
 })
 
@@ -335,7 +336,8 @@ function editar(btn){
                     <!--titulo panel-->
                     <span class="fs-5">Object</span>
                     <!--campo de visualización del objeto-->
-                    <pre name="" id="areaObjeto" class="text-secondary border-0"  style="font-size: 12px; height: 375px;">{
+                    <pre class="border-0" style="font-size: 12px; height: 375px;">
+                    <code class="language-javascript" id="areaObjetoUpdate">{
                         
    "nombre" : "${nombreEdit}",
 
@@ -347,7 +349,7 @@ function editar(btn){
 
    "base64" : ""
      
-}
+}</code>
                     </pre>
                 </div>
                 <!--panel preview-->
@@ -378,6 +380,7 @@ function editar(btn){
         </div>`;
     //Agregar el HTML al final del "li"
     listItem.innerHTML += htmlContent;
+    reloadscript();
     })
     .catch(error => {
         //Mensaje de error por consola
@@ -405,4 +408,25 @@ function changeImgUpdate(img){
         console.log(spt);
         document.getElementById("img-proyecto-update").src=result;
     } 
+}
+
+function reloadscript(){
+   let oldScript = document.getElementById("dynamic-js");
+
+   if (oldScript) {
+    document.body.removeChild(oldScript);
+    let scriptElementJs = document.createElement('script');
+    scriptElementJs.id = 'dynamic-js';
+    scriptElementJs.src = 'js/prism-js/prism.js';
+    document.body.appendChild(scriptElementJs);
+}
+    let oldCss = document.getElementById("dynamic-css");
+
+    if (oldCss) {
+    document.body.removeChild(oldScript);
+    let scriptElementCss = document.createElement('link');
+    scriptElementCss.id = 'dynamic-css';
+    scriptElementCss.href = 'js/prism-js/prism.css';
+    document.body.appendChild(scriptElementCss);
+    }
 }
