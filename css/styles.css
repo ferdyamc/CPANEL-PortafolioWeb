@@ -81,7 +81,7 @@ p,span,a{
     margin-right: 5px;
     box-sizing:border-box;
 }
-input, textarea{
+input, textarea, pre{
     background: transparent;
     outline: none;
     display: block;
@@ -91,7 +91,11 @@ input, textarea{
     width: 100%;
     overflow-x: hidden;
 }
+pre {
+    overflow-wrap: break-word; /* Para forzar el wrap del texto */
+    white-space: pre-line; /* Para mantener los espacios y saltos de línea */
 
+  }
 input[type="file"]{
     width: 0.1px;
     height: 0.1px;
@@ -221,4 +225,3 @@ label[for="ImgProyecto"], label[for="imgUpdate"] {
     width: 100px;
     height: 40px;
 }
-/**/

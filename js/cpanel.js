@@ -127,15 +127,16 @@ inpImagen.addEventListener("change", function(){
 
 //Construir Objeto
 function construirObjeto(base64, type, name, nombre, descripcion){
-    let contenido = `
-    {
-        "nombre" : "${nombre}",
-        "descripcion" : "${descripcion}",
-        "type" : "${type}",
-        "name" : "${name}",
-        "base64" : "${base64}"  
-    }`;
-    document.getElementById("areaObjeto").value = contenido;
+    let contenido = `{
+   "nombre" : "${nombre}",
+
+   "descripcion" : "${descripcion}",
+
+   "type" : "${type}","name" : "${name}",
+   
+   "base64" : "${base64}"  
+}`;
+    document.getElementById("areaObjeto").textContent = contenido;
 }
 
 //Destruir objeto
@@ -332,15 +333,18 @@ function editar(btn){
                     <!--titulo panel-->
                     <span class="fs-5">Object</span>
                     <!--campo de visualización del objeto-->
-                    <textarea name="" id="areaObjeto" cols="30" class="text-secondary border-0" disabled style="font-size: 12px; height: 375px;">
-                    {
-                        "nombre" : "${nombreEdit}",
-                        "descripcion" : "${descripcionEdit}",
-                        "type" : "${data.mimeType}",
-                        "name" : "${data.name}",
-                        "base64" : ""  
-                    }
-                    </textarea>
+                    <pre name="" id="areaObjeto" class="text-secondary border-0"  style="font-size: 12px; height: 375px;">{
+   "nombre" : "${nombreEdit}",
+
+   "descripcion" : "${descripcionEdit}",
+
+   "type" : "${data.mimeType}",
+
+   "name" : "${data.name}",
+
+   "base64" : ""
+}
+                    </pre>
                 </div>
                 <!--panel preview-->
                 <div class="p-3" id="contenedor-preiew" style="height: 475px;">
