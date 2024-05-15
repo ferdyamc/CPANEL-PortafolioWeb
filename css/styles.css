@@ -103,7 +103,6 @@ input[type="file"]{
 label[for="ImgProyecto"], label[for="imgUpdate"] {
     background-color: transparent;
     display: block;
-    transition: all .5s;
     cursor: pointer;
     padding: 15px 40px;
     width: fit-content;
