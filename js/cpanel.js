@@ -134,7 +134,9 @@ function construirObjeto(base64, type, name, nombre, descripcion){
 
    "descripcion" : "${descripcion}",
 
-   "type" : "${type}","name" : "${name}",
+   "type" : "${type}",
+   
+   "name" : "${name}",
    
    "base64" : "${base64}" 
 
@@ -144,7 +146,7 @@ function construirObjeto(base64, type, name, nombre, descripcion){
 
 //Destruir objeto
 function desrtuirObjeto(){
-    document.getElementById("areaObjeto").value = "";
+    document.getElementById("areaObjeto").textContent = "";
 }
 
 /*Mostrar preview*/
@@ -323,10 +325,10 @@ function editar(btn){
                         <label for="imgUpdate" class="text-secondary form-label">Seleccionar imágen</label>
                         <input type="file" accept="image/*" id="imgUpdate" required class="text-secondary" onchange="changeImgUpdate(this)">
                         <!--botón submit-->
-                        <button class="btn btn-outline-secondary col-12 mt-3" type="submit">Guardar</button> 
+                        <button class="btn btn-outline-secondary col-12 mt-3" type="submit">Actualizar</button> 
                     </form>
-                    <div class="progress mt-3 border-0 mx-3" id="progress-bar-update">
-                        <div class="progress-bar progress-bar-striped bg-secondary progress-bar-animated w-100">
+                    <div class="progress mt-3 border-0 mx-3 w-auto" id="progress-bar-update">
+                        <div class="progress-bar progress-bar-striped bg-secondary progress-bar-animated m-0 w-100">
                             Actualizando proyecto...
                         </div>
                     </div>
@@ -409,7 +411,7 @@ function changeImgUpdate(img){
         document.getElementById("img-proyecto-update").src=result;
     } 
 }
-
+//Recarga el css y el script "de prism js" para aplicar los estilos a los paneles "object"
 function reloadscript(){
    let oldScript = document.getElementById("dynamic-js");
 

@@ -91,8 +91,8 @@
                             <!--botón submit-->
                             <button class="btn btn-outline-secondary col-12 mt-3" type="submit">Guardar</button> 
                         </form>
-                        <div class="progress mt-3 border-0 mx-3" id="progress-bar-post">
-                            <div class="progress-bar progress-bar-striped bg-secondary progress-bar-animated w-100">
+                        <div class="progress mt-3 border-0 mx-3 w-auto" id="progress-bar-post">
+                            <div class="progress-bar progress-bar-striped bg-secondary progress-bar-animated m-0 w-100">
                                 Creando proyecto...
                             </div>
                         </div>
@@ -145,6 +145,12 @@
                         Actualizando Lista...
                     </div>
                 </div>
+                <!--Progres bar-->
+                <div class="progress mb3 mt-5" id="progress-bar-delete">
+                    <div class="progress-bar progress-bar-striped bg-success progress-bar-animated w-100">
+                        Eliminado proyecto...
+                    </div>
+                </div>       
                 <!--lista de proyecto-->
                 <ul class="col-12" id="lista-proyectos">
                     <!--(los "li" se crean a través de "getData" del archivo "cpanel.js")-->
