@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="css/responsive.css">
     <!--Hacer Zoom en la imagen del Preview-->
     <script src="js/zoom-proyect.js"></script>
+    <!--SweetAlert CDN-->
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
 </head>
 <!--BODY (SITE)-->
 <body class="bg-dark">
@@ -81,19 +83,19 @@
                         <form action="" class="p-3 needs-validation col-12" id="formulario" novalidate>
                             <!--campo nombre-->
                             <div class="w-100 border-0 mx-0 position-relative has-validation">
-                                <input type="text" name="titulo" id="Nombre" required class="text-secondary mt-2 mb-3 form-c bg-transparent" autocomplete="off" placeholder="Nombre">
+                                <input type="text" name="titulo" id="Nombre" required class="text-secondary mt-2 mb-3 form-c bg-transparent" autocomplete="off" placeholder="Nombre" onchange="changeObject(this,document.getElementById('AreaDescripcion'),document.getElementById('ImgProyecto'),1)">
                                 <!--<div class="invalid-tooltip w-100 mx-0 my-2">
                                     Por favor ingrese el nombre de proyecto.
                                 </div>-->
                             </div>
                             <!--campo descripción-->
                             <div class="w-100 border-0 mt-0 mx-0 position-relative has-validation">
-                                <textarea name="Descripcion" id="AreaDescripcion" cols="30" rows="3" required class="text-secondary mt-2 mb-3 form-c" placeholder="Descripción"></textarea>
+                                <textarea name="Descripcion" id="AreaDescripcion" cols="30" rows="3" required class="text-secondary mt-2 mb-3 form-c" placeholder="Descripción" onchange="changeObject(document.getElementById('Nombre'),this,document.getElementById('ImgProyecto'),1)"></textarea>
                             </div>
                             <!--campo img-->
                             <div class="w-100 border-0 mt-0 mx-0 position-relative has-validation">
                                 <label for="ImgProyecto" class="text-secondary form-label" id="label-img">Seleccionar imágen</label>
-                                <input type="file" accept="image/*" id="ImgProyecto" class="form-c" required class="text-secondary">
+                                <input type="file" accept="image/*" id="ImgProyecto" class="form-c" required class="text-secondary" onchange="changeObject(document.getElementById('Nombre'),document.getElementById('AreaDescripcion'),this,1)">
                             </div>
                             <!--botón submit-->
                             <button class="btn btn-outline-secondary col-12 mt-3 mx-0" type="submit">Guardar</button> 
@@ -165,6 +167,7 @@
             </section>
         </main>
     </div>
+    
     <!--FOOTER-->
     <footer class="col-12 d-flex flex-column justify-content-center align-items-center" id="pie-de-pagina" style="height: 80px;background:rgb(114, 58, 235)">
         <p class=" m-0" style="line-height: 30px; height: 30px;">Desarrollado por Ferdy Andrés Marulanda Carvajal</p>
@@ -176,6 +179,7 @@
     <script src="js/cpanel.js"></script><!--CRUD-->
     <script src="js/copy-link.js"></script> <!--Copiar links: sheet - drive-->
     <script src="js/prism-js/prism.js" id="dynamic-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script><!--SweetAlert CDN-->
     <!--<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>--><!--CDN Chart JS-->
     <!--<script src="js/chart.js"></script>--><!--Implementación - Chart JS-->
 </body>

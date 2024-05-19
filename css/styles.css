@@ -247,3 +247,14 @@ code span{
     width: 100px;
     height: 40px;
 }
+
+/*Toaster*/
+.swal2-popup{
+    display: flex !important;
+    flex-direction: row !important;
+}
+
+#swal2-title{
+    display: flex !important;
+    align-items: center;
+}

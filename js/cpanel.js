@@ -57,9 +57,7 @@ function getData(){
 }
 
 //Submit ----------------------------------------------------------------------------------------------------(POST)
-
-
-    form.addEventListener("submit", (event)=>{
+form.addEventListener("submit", (event)=>{
         //Evitar eventos por defecto (evitar actualizar la pagina al hacer click)
         event.preventDefault();
         //Mostrar barra de progreso
@@ -109,12 +107,30 @@ function getData(){
                 desrtuirObjeto();
                 ocultarPreview();
                 form.classList.add('was-validated'); 
+                //Toaster (SweetAlert)
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                      toast.onmouseenter = Swal.stopTimer;
+                      toast.onmouseleave = Swal.resumeTimer;
+                    }
+                  });
+                  Toast.fire({
+                    icon: "success",
+                    title: "Proyecto creado con éxito"
+                  });
+
                 setTimeout(()=>{
                     estado1.style.display="none";
                     form.classList.remove('was-validated');
                     lb.style.borderColor="#555555";
                     form.reset();
                 },5000)
+                
             })
             .catch(error => {
                 console.error('Error:', error)
@@ -128,7 +144,7 @@ function getData(){
             });//capturar mensajes de error
         }
         form.classList.add('was-validated');
-    },false)
+},false)
 
 
 //Convertir Imagen del input a base64
@@ -156,7 +172,7 @@ inpImagen.addEventListener("change", function(){
 })
 
 //Construir Objeto
-function construirObjeto(base64, type, name, nombre, descripcion){
+function construirObjeto(base64, type, name, nombre, descripcion, numForm){
     let contenido = `{
 
    "nombre" : "${nombre}",
@@ -170,7 +186,14 @@ function construirObjeto(base64, type, name, nombre, descripcion){
    "base64" : "${base64}" 
 
 }`;
-    document.getElementById("areaObjeto").textContent = contenido;
+    if(numForm == 1){
+        document.getElementById("areaObjeto").textContent = contenido;
+    }else if(numForm == 2){
+        if(document.getElementById("areaObjetoUpdate")){
+            document.getElementById("areaObjetoUpdate").textContent = contenido;
+        }
+        
+    }
 }
 
 //Destruir objeto
@@ -179,11 +202,19 @@ function desrtuirObjeto(){
 }
 
 /*Mostrar preview*/
-function mostrarPreview(){
-    document.getElementById("item-mansory").style.display="block";
-    document.getElementById("titulo-proyecto").textContent=nombre.value;
-    document.getElementById("descripcion-proyecto").textContent=descripcion.value;
-    document.getElementById("img-proyecto").src=result;
+function mostrarPreview(numForm){
+
+    if(numForm == 1){
+        document.getElementById("item-mansory").style.display="block";
+        document.getElementById("titulo-proyecto").textContent=nombre.value;
+        document.getElementById("descripcion-proyecto").textContent=descripcion.value;
+        document.getElementById("img-proyecto").src=result;
+    }else if(numForm == 2){
+        document.getElementById("titulo-proyecto-update").textContent=nombre.value;
+        document.getElementById("descripcion-update").textContent=descripcion.value;
+        document.getElementById("img-proyecto-update").src=result;
+    }
+   
 }
 
 //Ocultar preview
@@ -212,6 +243,22 @@ function eliminar(idDelete){
     .then(text => {
         //Ocultar la barra de progreso
         document.querySelector("#progress-bar-delete").style.display="none";
+        //Toaster (SweetAlert)
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            }
+          });
+          Toast.fire({
+            icon: "success",
+            title: "Proyecto eliminado con éxito"
+          });
         getData();
     })
     .catch(error => {
@@ -268,6 +315,22 @@ function formUpdate(e){
         let b = document.querySelector(".hijo");
         b.classList.remove("d-block");
         b.style.display="none";
+        //Toaster (SweetAlert)
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            }
+          });
+          Toast.fire({
+            icon: "success",
+            title: "Proyecto actualizado con éxito"
+          });
         //Actualizar lista
         getData();
     })
@@ -345,14 +408,14 @@ function editar(btn){
                     <!--formulario-->
                     <form action="" class="p-3 needs-validation col-12" id="formularioUpdate" novalidate onsubmit="formUpdate(event)">
                         <!--campo id-->
-                        <input type="text" name="id" id="idReg" required class="text-secondary mt-2 mb-3" autocomplete="off" value="${idEdit}" hidden>
+                        <input type="text" name="id" id="idReg" required class="text-secondary mt-2 mb-3" autocomplete="off" value="${idEdit}" hidden >
                         <!--campo nombre-->
-                        <input type="text" name="titulo" id="nombreUpdate" required class="text-secondary mt-2 mb-3" autocomplete="off" placeholder="${nombreEdit}">
+                        <input type="text" name="titulo" id="nombreUpdate" required class="text-secondary mt-2 mb-3" autocomplete="off" placeholder="${nombreEdit}" onchange="changeObject(this,document.getElementById('descripcionUpdate'),document.getElementById('imgUpdate'),2)">
                         <!--campo descripción-->
-                        <textarea name="Descripcion" id="descripcionUpdate" cols="30" rows="3" required class="text-secondary mt-2 mb-3" placeholder="${descripcionEdit}"></textarea>
+                        <textarea name="Descripcion" id="descripcionUpdate" cols="30" rows="3" required class="text-secondary mt-2 mb-3" placeholder="${descripcionEdit}" onchange="changeObject(document.getElementById('nombreUpdate'),this,document.getElementById('imgUpdate'),2)"></textarea>
                         <!--campo img-->
                         <label for="imgUpdate" class="text-secondary form-label">Seleccionar imágen</label>
-                        <input type="file" accept="image/*" id="imgUpdate" required class="text-secondary" onchange="changeImgUpdate(this)">
+                        <input type="file" accept="image/*" id="imgUpdate" required class="text-secondary" onchange="changeObject(document.getElementById('nombreUpdate'),document.getElementById('descripcionUpdate'),this,2)">
                         <!--botón submit-->
                         <button class="btn btn-outline-secondary col-12 mt-3" type="submit">Actualizar</button> 
                     </form>
@@ -462,4 +525,102 @@ function reloadscript(){
     scriptElementCss.href = 'js/prism-js/prism.css';
     document.head.appendChild(scriptElementCss);
     }
+}
+
+/*ACTUALIZAR PANEL: OBJECT*/
+function ActualizarObject(_nombre,_descripcion,img){
+    let contenido
+
+    if(img.files[0].length > 0){
+
+        let fr = new FileReader();
+        fr.readAsDataURL(img.files[0])
+        _nombre =  _nombre.value == "" ? "" : _nombre.value();
+        _descripcion =  _descripcion.value == "" ? "" : _descripcion.value();
+
+        fr.onload = function(){
+            result = fr.result;
+            spt = result.split("base64,"[1]);
+        }
+
+            contenido = `{
+
+                "nombre" : "${_nombre}",
+            
+                "descripcion" : "${_descripcion}",
+            
+                "type" : "${img._type}",
+                
+                "name" : "${img._name}",
+                
+                "base64" : "${spt}" 
+            
+            }`
+    }else{
+        contenido = `{
+
+            "nombre" : "${_nombre}",
+        
+            "descripcion" : "${_descripcion}",
+        
+            "type" : "",
+            
+            "name" : "",
+            
+            "base64" : "" 
+        
+        }`
+    }
+    document.getElementById("areaObjeto").textContent = contenido;
+}
+
+
+//Convertir Imagen del input a base64
+function changeObject(_nombre, _descripcion,_img,_numForm){
+
+    if(_img.files.length > 0){
+        //contruir instacia FileReader
+        let fr = new FileReader();
+        //Leer la imagen del input en el FileReader
+        fr.readAsDataURL(_img.files[0]);
+        //función que se ejecuta una vez leida la imagen por el FileReader
+        fr.onload = function(){
+            result = fr.result;//Captura el valor obtenido
+            if(result){
+                let cls = document.querySelector(".was-validated");
+                if(cls){
+                    document.querySelector("#label-img").style.borderColor="#198754";
+                }else{
+                    
+                }
+            }
+            spt = result.split("base64,")[1];//hace un split al valor obtenido por el FileReader (para retirar la palabra "base64,")
+            construirObjeto(spt, _img.files[0].type, _img.files[0].name, nombre.value, descripcion.value,_numForm);/*Muestra el objeto contruido*/
+            mostrarPreview(_numForm);/*Muestra el preview*/
+            reloadscript();
+        }
+    }else{
+        construirObjeto("", "", "", _nombre.value, _descripcion.value,_numForm);/*Muestra el objeto contruido*/  
+        reloadscript();
+    }
+        
+}
+
+//Función Toster
+function toaster(){
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Signed in successfully"
+      });
 }
