@@ -12,9 +12,9 @@ getData();//Mostrar la lista de proyectos al cargar la pagina
 //Obtener datos de la Nube - rellenar lista -----------------------------------------------------------------(GET)
 function getData(){
     document.querySelector("#progress-bar").style.display="block";
-    // Limpia el contenido anterior del ul
+    // Ocultar lista (mientras carga la barra de progreso y se recibe la información actualizada)
     dataList.style.display="none";
-    /*Obtener en formato JSON los datos de la hoja de calcula de google y llenar UL (listado de pyectos)*/
+    // Obtener en formato JSON los datos de la hoja de calcula de google y llenar UL (listado de pyectos)
     fetch(url)
     .then(response => response.json())
     .then(data => {
@@ -73,7 +73,7 @@ form.addEventListener("submit", (event)=>{
             }else{
                 lb.style.borderColor="#198754";
             }
-            //Mostrar barra de progreso
+            //Ocultar barra de progreso
             document.querySelector("#progress-bar-post").style.display="none";
             //Detener el evento
             event.stopPropagation() 
