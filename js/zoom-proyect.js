@@ -1,11 +1,8 @@
 
-let img; //variable para almacenar el elemento "img" al cual se hará hacer zoom
-
-
 function zoomIn(event){ //evento mousemove
 
-    contenedor = this; //capturar el elemento contenedor especifico
-    img = this.querySelector('img'); //capturar la imagen especifica (imagen hija del contenedor)
+    let = contenedor = this; //capturar el elemento contenedor especifico
+    let img = this.querySelector('img'); //capturar la imagen especifica (imagen hija del contenedor)
 
     let rect = contenedor.getBoundingClientRect(); //obtener un objeto con las cordenadas del elemento contenedor
     let clientX = event.clientX - rect.left; //obtener la posicion del cursor con base en la coordenada x 
@@ -18,12 +15,10 @@ function zoomIn(event){ //evento mousemove
     clientY = clientY / mHeight * 100 //recalcula la posicion vertical del cursor en porcentaje con respecto al alto total del elemento
 
     img.style.transform = `translate(-${clientX}%, -${clientY}%) scale(2)`; //cambia la escala y la posicion de la imagen de acuerdo a los porcentajes de ancho y alto
-
 };
 function zoomOut(){ //evento mouseleave
 
-    contenedor = this; //capturar el elemento contenedor especifico
-    img = this.querySelector('img'); //capturar la imagen especifica (imagen hija del contenedor)
+    let = contenedor = this; //capturar el elemento contenedor especifico
+    let = img = this.querySelector('img'); //capturar la imagen especifica (imagen hija del contenedor)
     img.style.transform = 'translate(-50%,-50%) scale(1)'; //reestablece la escala y la posicion original de la imagen
-
 };
